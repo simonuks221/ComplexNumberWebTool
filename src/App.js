@@ -64,7 +64,6 @@ const changeNumber = (newNumber, id, numberType) =>{
       }
       break;
   }
-  //setNumbers(complexNumbers.map((number) => (number.id === id ?{... number, value: newNumber} : number)))
 }
 
 //AddComplexNumber
