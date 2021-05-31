@@ -93,12 +93,22 @@ const MathAction = (mathAction, complexNumber) => {
               }
               else{
                 answer = AddComplex(answer, number.rectangularForm)
-                console.log(answer)
               }
             }
           })
           break;
         case 2: //Subtraction
+          complexNumbers.forEach(function(number){
+            if(number.mathAction === mathAction){
+              if(numbersUsed === 0){
+                answer = number.rectangularForm
+                numbersUsed++
+              }
+              else{
+                answer = SubtractComplex(answer, number.rectangularForm)
+              }
+            }
+          })
           break;
       }
 
