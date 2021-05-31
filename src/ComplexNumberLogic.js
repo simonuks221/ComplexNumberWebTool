@@ -1,4 +1,4 @@
-//Gets real and imaginary parts of rectangular form
+//Gets real and imaginary, amplitude, phase parts
 export const PartitionComplex = (number) => {
     var regExRec = /^(?:(?<real>\d+(?:(?:\.\d+)?)?)?)?(?:[+\-])?(?<imaginary>\d+(?:(?:\.\d+)??)?)?[iI]$/i
     var regExExp = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:e))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?[iI]$/i
@@ -20,15 +20,14 @@ export const PartitionComplex = (number) => {
                     var newReal = result[1] * Math.cos(result[3] * Math.PI / 180).toFixed(3)
                     var newImag = result[1] * Math.sin(result[3] * Math.PI / 180).toFixed(3)
                     console.log(newReal, newImag, 'time')
-                    return [parseFloat(newReal), parseFloat(newImag)]
+                    return [parseFloat(newReal), parseFloat(newImag), parseFloat(result[1]), parseFloat(result[3])]
                 }
             }
             else{ //Expoenntial
-            
                 var newReal = result[1] * Math.cos(result[2] * Math.PI / 180).toFixed(3)
                 var newImag = result[1] * Math.sin(result[2] * Math.PI / 180).toFixed(3)
-                console.log(newReal, newImag, 'exponential')
-                return[parseFloat(newReal), parseFloat(newImag)]
+                console.log(newReal, newImag, 'exponential', result[1], result[2])
+                return[parseFloat(newReal), parseFloat(newImag), parseFloat(result[1]), parseFloat(result[2])]
             }
         }
         else{ //Rectangular
@@ -50,12 +49,23 @@ export const ReconstructComplex = (parts, form) => { //Parts[0] - real, 1 - imag
             console.log('Bad reconstrucion form selected') 
             return ''
         case 'rectangular':
-            console.log('here', parts)
             return parts[0].toFixed(3) + (parts[1] > 0? '+': '') + parts[1].toFixed(3) + 'i'
         case 'exponential':
-            return newAmplitude.toFixed(3) + 'e' + newPhase.toFixed(3) + 'i'
+            if(parts.length > 2){
+                console.log("pog")
+                return parts[2].toFixed(3) + 'e' + parts[3].toFixed(3) + 'i'
+            }
+            else{
+                console.log('ne pog', )
+                return newAmplitude.toFixed(3) + 'e' + newPhase.toFixed(3) + 'i'
+            }
         case 'time':
-            return newAmplitude.toFixed(3) + 'cos(w' + (newPhase > 0 ? '+': '') + newPhase.toFixed(3) + ')'
+            if(parts.length > 2){
+                return parts[2].toFixed(3) + 'cos(w' + (parts[3] > 0 ? '+': '') + parts[3].toFixed(3) + ')'
+            }
+            else{
+                return newAmplitude.toFixed(3) + 'cos(w' + (newPhase > 0 ? '+': '') + newPhase.toFixed(3) + ')'
+            }
     }
 }
 
