@@ -1,6 +1,8 @@
 import Header from "./components/Header"
 import ComplexNumbers from "./components/ComplexNumbers"
 
+import {AddComplex, SubtractComplex} from './ComplexNumberLogic'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import {} from 'react-bootstrap'
@@ -69,18 +71,38 @@ const changeNumber = (newNumber, id, numberType) =>{
 }
 
 //Addition substraction operations
-const MathAction = (mathAction, id) => {
-  if (complexNumbers[id].correct){
-    setResult({...mathResult, result: true})
-    switch(mathAction){
-      default:
-        break;
-      case 0: //Addition
-  
-        break;
-      case 1: //Reduction
-  
-        break;
+const MathAction = (mathAction, complexNumber) => {
+  if(complexNumber.correct){
+    complexNumber.mathAction = mathAction
+    if(mathAction === 0){ //Action is discarded
+      
+    }
+    else{ //Action is added
+      complexNumber.mathAction = mathAction
+      var answer = ''
+      var numbersUsed = 0
+      switch(mathAction){
+        default:
+          break;
+        case 1: //Addition
+          complexNumbers.forEach(function(number){
+            if(number.mathAction === mathAction){
+              if(numbersUsed === 0){
+                answer = number.rectangularForm
+                numbersUsed++
+              }
+              else{
+                answer = AddComplex(answer, number.rectangularForm)
+                console.log(answer)
+              }
+            }
+          })
+          break;
+        case 2: //Subtraction
+          break;
+      }
+
+    setResult({...mathResult, rectangularForm: answer, result: true})
     }
   }
 }
@@ -88,7 +110,7 @@ const MathAction = (mathAction, id) => {
 //AddComplexNumber
 const AddNewNumber = () => {
   const newNumber = {id: complexNumbers.length + 1,
-    rectangularForm: '', exponentialForm: '', timeForm: '', correct: false,
+    rectangularForm: '', exponentialForm: '', timeForm: '', correct: false, mathAction: 0,
 }
   setNumbers([...complexNumbers, newNumber])
 }
