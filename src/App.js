@@ -9,8 +9,10 @@ import {useState} from 'react' //A so called Hook
 
 function App() {
   const name = "Simonas"
+  const [mathResult, setResult] = useState({result: false, rectangularForm: '', exponentialForm: '', timeForm: '',});
 
   const [complexNumbers, setNumbers] = useState([])
+  
 
 //Delete number
 const deleteNumber  = (id) => {
@@ -66,6 +68,23 @@ const changeNumber = (newNumber, id, numberType) =>{
   }
 }
 
+//Addition substraction operations
+const MathAction = (mathAction, id) => {
+  if (complexNumbers[id].correct){
+    setResult({...mathResult, result: true})
+    switch(mathAction){
+      default:
+        break;
+      case 0: //Addition
+  
+        break;
+      case 1: //Reduction
+  
+        break;
+    }
+  }
+}
+
 //AddComplexNumber
 const AddNewNumber = () => {
   const newNumber = {id: complexNumbers.length + 1,
@@ -85,11 +104,8 @@ const AddNewNumber = () => {
       </div>
       <Header userName = {name} addNewNumber = {AddNewNumber}/>
       <div className = 'card mx-5 my-2 bg-dark'>
-        {complexNumbers.length > 0 ?<ComplexNumbers complexNumbers = {complexNumbers} onDelete = {deleteNumber} onNumberChange = {changeNumber}/>
+        {complexNumbers.length > 0 ?<ComplexNumbers complexNumbers = {complexNumbers} onDelete = {deleteNumber} onNumberChange = {changeNumber} onMathAction = {MathAction} complexNumberResult = {mathResult}/>
         : <p className = 'text mx-2 my-2 text-light'>No numbers, press above to add</p> }
-       </div>
-       <div className = 'bg-primary d-flex flex-column'>
-
        </div>
     </div>
   );
