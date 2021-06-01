@@ -1,8 +1,8 @@
 //Gets real and imaginary, amplitude, phase parts
 export const PartitionComplex = (number) => {
     var regExRec = /^(?:(?<real>(?:[-])?\d+(?:(?:\.\d+)?)?(?!i))?)?(?<imaginary>(?:[+\-])?\d+(?:\.\d+)?)?[iI]$/i
-    var regExExp = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:e))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?[iI]$/i
-    var regExTime = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:cos\())(?:(?<frequency>\d+(?:)(?:(?:\.\d+)?)))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?(?:(\)))$/i
+    var regExExp = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))?(?:e))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?[iI]$/i
+    var regExTime = /^(?:(?<amplitude>(?:[+\-])?\d+(?:(?:(?:\.\d+)?)))?(?:cos\())(?:(?<frequency>[0-9w]+(?:(?:\.\d+)?)))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?(?:(\)))$/i
 
     var result = number.match(regExRec)
     try{
@@ -17,15 +17,16 @@ export const PartitionComplex = (number) => {
                     return null
                 }
                 else{
-                    var newReal = result[1] * Math.cos(result[3] * Math.PI / 180).toFixed(3)
-                    var newImag = result[1] * Math.sin(result[3] * Math.PI / 180).toFixed(3)
-                    return [parseFloat(newReal), parseFloat(newImag), parseFloat(result[1]), parseFloat(result[3])]
+                    var newReal = (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])) * Math.cos((Number.isNaN(parseFloat(result[3]))? 0: parseFloat(result[3])) * Math.PI / 180).toFixed(3)
+                    var newImag = (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])) * Math.sin((Number.isNaN(parseFloat(result[3]))? 0: parseFloat(result[3])) * Math.PI / 180).toFixed(3)
+                    return [parseFloat(newReal), parseFloat(newImag), (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])), (Number.isNaN(parseFloat(result[3]))? 0: parseFloat(result[3]))]
                 }
             }
             else{ //Expoenntial
-                var newReal = result[1] * Math.cos(result[2] * Math.PI / 180).toFixed(3)
-                var newImag = result[1] * Math.sin(result[2] * Math.PI / 180).toFixed(3)
-                return[parseFloat(newReal), parseFloat(newImag), parseFloat(result[1]), parseFloat(result[2])]
+                console.log((Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])))
+                var newReal = (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])) * Math.cos((Number.isNaN(parseFloat(result[2]))? 0: parseFloat(result[2])) * Math.PI / 180).toFixed(3)
+                var newImag = (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])) * Math.sin((Number.isNaN(parseFloat(result[2]))? 0: parseFloat(result[2])) * Math.PI / 180).toFixed(3)
+                return[parseFloat(newReal), parseFloat(newImag), (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1])), (Number.isNaN(parseFloat(result[2]))? 0: parseFloat(result[2]))]
             }
         }
         else{ //Rectangular
