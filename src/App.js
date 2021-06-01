@@ -1,5 +1,6 @@
 import Header from "./components/Header"
 import ComplexNumbers from "./components/ComplexNumbers"
+import AnimeImage from "./components/AnimeImage"
 
 import {AddComplex, SubtractComplex, PartitionComplex, ReconstructComplex} from './ComplexNumberLogic'
 
@@ -7,14 +8,31 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import {} from 'react-bootstrap'
 
-import {useState} from 'react' //A so called Hook
+import {useState, useEffect} from 'react' //A so called Hook
 
 function App() {
   const name = "Simonas"
   const [mathResult, setResult] = useState({result: false, rectangularForm: '', exponentialForm: '', timeForm: '',});
+  const [animeImage, setAnimeImage] = useState({URL: ''})
 
   const [complexNumbers, setNumbers] = useState([])
+
+  useEffect(() => {
+    const getAnimeImage = async () =>{
+      const imageFromServer = await fetchAnimeImage()
+      setAnimeImage(imageFromServer)
+      console.log(imageFromServer)
+    }
+
+    getAnimeImage()
+  }, [])
   
+  //Fetch anime pic
+  const fetchAnimeImage = async() => {
+    const res = await fetch('https://api.waifu.pics/sfw/neko')
+    const data = await res.json()
+    return data
+  }
 
 //Delete number
 const deleteNumber  = (id) => {
@@ -117,6 +135,9 @@ const AddNewNumber = () => {
       <div className = 'card mx-5 my-2 bg-dark'>
         {complexNumbers.length > 0 ?<ComplexNumbers complexNumbers = {complexNumbers} onDelete = {deleteNumber} onNumberChange = {changeNumber} onMathAction = {MathActionButtonPressed} complexNumberResult = {mathResult}/>
         : <p className = 'text mx-2 my-2 text-light'>No numbers, press above to add</p> }
+       </div>
+       <div>
+         <AnimeImage animeImageInfo = {animeImage}/>
        </div>
     </div>
   );
