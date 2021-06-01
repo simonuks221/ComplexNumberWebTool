@@ -17,8 +17,8 @@ const ComplexNumber = ({complexNumber, onDelete, onNumberChange, onMathAction}) 
                 </div>
                 <div className = 'col-3'>
                     <button className = 'btn-danger float-end rounded' onClick = {() => onDelete(complexNumber.id)}><FaTimes className = 'my-1 mx-0'/></button>
-                    <button className = 'btn-primary float-start rounded mx-2' onClick = {() => onMathAction(1, complexNumber)}><FaPlus className = 'my-1 mx-0'/></button>
-                    <button className = {'btn-primary float-start rounded'} onClick = {() => onMathAction(2, complexNumber)}><FaMinus className = 'my-1 mx-0'/></button>
+                    <button className = 'btn-primary float-start rounded mx-2' onClick = {() => onMathAction(complexNumber, 1)}><FaPlus className = 'my-1 mx-0'/></button>
+                    <button className = {'btn-primary float-start rounded'} onClick = {() => onMathAction(complexNumber, 2)}><FaMinus className = 'my-1 mx-0'/></button>
                 </div>
             </div>
         </div>

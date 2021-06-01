@@ -1,6 +1,6 @@
 //Gets real and imaginary, amplitude, phase parts
 export const PartitionComplex = (number) => {
-    var regExRec = /^(?:(?<real>\d+(?:(?:\.\d+)?)?)?)?(?:[+\-])?(?<imaginary>\d+(?:(?:\.\d+)??)?)?[iI]$/i
+    var regExRec = /^(?:(?<real>(?:[+\-])?\d+(?:(?:\.\d+)?)?)?)?(?<imaginary>(?:[+\-])?\d+(?:(?:\.\d+)??)?)?[iI]$/i
     var regExExp = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:e))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?[iI]$/i
     var regExTime = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:cos\())(?:(?<frequency>\d+(?:)(?:(?:\.\d+)?)))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?(?:(\)))$/i
 
@@ -46,25 +46,23 @@ export const ReconstructComplex = (parts, form) => { //Parts[0] - real, 1 - imag
     var newPhase = Math.atan(parts[1]/parts[0]) * 180 / Math.PI
     switch(form){
         default:
-            console.log('Bad reconstrucion form selected') 
+            console.log('Bad reconstrucion form selected: ', form) 
             return ''
         case 'rectangular':
-            return parts[0].toFixed(3) + (parts[1] > 0? '+': '') + parts[1].toFixed(3) + 'i'
+            return parseFloat(parts[0].toFixed(3)) + (parts[1] > 0? '+': '') + parseFloat(parts[1].toFixed(3)) + 'i'
         case 'exponential':
             if(parts.length > 2){
-                console.log("pog")
-                return parts[2].toFixed(3) + 'e' + parts[3].toFixed(3) + 'i'
+                return parseFloat(parts[2].toFixed(3)) + 'e' + parseFloat(parts[3].toFixed(3)) + 'i'
             }
             else{
-                console.log('ne pog', )
-                return newAmplitude.toFixed(3) + 'e' + newPhase.toFixed(3) + 'i'
+                return parseFloat(newAmplitude.toFixed(3)) + 'e' + parseFloat(newPhase.toFixed(3)) + 'i'
             }
         case 'time':
             if(parts.length > 2){
-                return parts[2].toFixed(3) + 'cos(w' + (parts[3] > 0 ? '+': '') + parts[3].toFixed(3) + ')'
+                return parseFloat(parts[2].toFixed(3)) + 'cos(w' + (parts[3] > 0 ? '+': '') + parseFloat(parts[3].toFixed(3)) + ')'
             }
             else{
-                return newAmplitude.toFixed(3) + 'cos(w' + (newPhase > 0 ? '+': '') + newPhase.toFixed(3) + ')'
+                return parseFloat(newAmplitude.toFixed(3)) + 'cos(w' + (newPhase > 0 ? '+': '') + parseFloat(newPhase.toFixed(3)) + ')'
             }
     }
 }
@@ -73,11 +71,11 @@ export const AddComplex = (number1, number2) => {
     var complex1 = PartitionComplex(number1)
     var complex2 = PartitionComplex(number2)
     console.log(complex1, complex2)
-    return ReconstructComplex(parseInt(complex1[0]) + parseInt(complex2[0]), parseInt(complex1[1]) + parseInt(complex2[1]))
+    return ReconstructComplex([parseInt(complex1[0]) + parseInt(complex2[0]), parseInt(complex1[1]) + parseInt(complex2[1])], 'rectangular')
 }
 
 export const SubtractComplex = (number1, number2) => {
     var complex1 = PartitionComplex(number1)
     var complex2 = PartitionComplex(number2)
-    return ReconstructComplex(parseInt(complex1[0]) - parseInt(complex2[0]), parseInt(complex1[1]) - parseInt(complex2[1]))
+    return ReconstructComplex([parseInt(complex1[0]) - parseInt(complex2[0]), parseInt(complex1[1]) - parseInt(complex2[1])], 'rectangular')
 }

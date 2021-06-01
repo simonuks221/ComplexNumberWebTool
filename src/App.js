@@ -52,54 +52,49 @@ const changeNumber = (newNumber, id, numberType) =>{
       }
       break;
   }
+  MathAction()
+}
+
+const MathActionButtonPressed = (complexNumber, mathAction) => {
+  if(complexNumber.mathAction === mathAction){
+    complexNumber.mathAction = 0
+  }
+  else{
+    complexNumber.mathAction = mathAction
+  }
+  MathAction()
 }
 
 //Addition substraction operations
-const MathAction = (mathAction, complexNumber) => {
-  if(complexNumber.correct){
-    complexNumber.mathAction = mathAction
-    if(mathAction === 0){ //Action is discarded
-      
-    }
-    else{ //Action is added
-      complexNumber.mathAction = mathAction
-      var answer = ''
-      var numbersUsed = 0
-      switch(mathAction){
-        default:
-          break;
-        case 1: //Addition
-          complexNumbers.forEach(function(number){
-            if(number.mathAction === mathAction){
-              if(numbersUsed === 0){
-                answer = number.rectangularForm
-                numbersUsed++
-              }
-              else{
-                answer = AddComplex(answer, number.rectangularForm)
-              }
-            }
-          })
-          break;
-        case 2: //Subtraction
-          complexNumbers.forEach(function(number){
-            if(number.mathAction === mathAction){
-              if(numbersUsed === 0){
-                answer = number.rectangularForm
-                numbersUsed++
-              }
-              else{
-                answer = SubtractComplex(answer, number.rectangularForm)
-              }
-            }
-          })
-          break;
+const MathAction = () => {
+  var answer = ''
+  var numbersUsed = 0
+  complexNumbers.forEach(function(number){
+    if(number.correct && number.mathAction !== 0){
+      if(numbersUsed === 0){
+        answer = number.rectangularForm
+        numbersUsed++
       }
-
-    setResult({...mathResult, rectangularForm: answer, result: true})
+      else{
+        switch(number.mathAction){
+          default:
+            console.log('Bad math action')
+            break;
+          case 1:
+            answer = AddComplex(answer, number.rectangularForm)
+            break;
+          case 2:
+            answer = SubtractComplex(answer, number.rectangularForm)
+            break;
+        }
+      }
     }
+  })
+  if(answer !== ''){
+    setResult({...mathResult, rectangularForm: answer, exponentialForm: ReconstructComplex(PartitionComplex(answer), 'exponential'), timeForm: ReconstructComplex(PartitionComplex(answer), 'time'), result: true})
   }
 }
+
 
 //AddComplexNumber
 const AddNewNumber = () => {
@@ -120,7 +115,7 @@ const AddNewNumber = () => {
       </div>
       <Header userName = {name} addNewNumber = {AddNewNumber}/>
       <div className = 'card mx-5 my-2 bg-dark'>
-        {complexNumbers.length > 0 ?<ComplexNumbers complexNumbers = {complexNumbers} onDelete = {deleteNumber} onNumberChange = {changeNumber} onMathAction = {MathAction} complexNumberResult = {mathResult}/>
+        {complexNumbers.length > 0 ?<ComplexNumbers complexNumbers = {complexNumbers} onDelete = {deleteNumber} onNumberChange = {changeNumber} onMathAction = {MathActionButtonPressed} complexNumberResult = {mathResult}/>
         : <p className = 'text mx-2 my-2 text-light'>No numbers, press above to add</p> }
        </div>
     </div>
