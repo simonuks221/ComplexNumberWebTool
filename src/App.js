@@ -1,6 +1,7 @@
 import Header from "./components/Header"
 import ComplexNumbers from "./components/ComplexNumbers"
 import AnimeImage from "./components/AnimeImage"
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 import {AddComplex, SubtractComplex, PartitionComplex, ReconstructComplex} from './ComplexNumberLogic'
 
@@ -123,6 +124,7 @@ const AddNewNumber = () => {
 }
 
   return (
+    <Router>
     <div className="App bg-dark">
       <div className = 'container bg-dark'>
         <div className = 'row'>
@@ -140,6 +142,7 @@ const AddNewNumber = () => {
          <AnimeImage animeImageInfo = {animeImage}/>
        </div>
     </div>
+    </Router>
   );
 }
 
