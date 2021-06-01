@@ -1,6 +1,6 @@
 //Gets real and imaginary, amplitude, phase parts
 export const PartitionComplex = (number) => {
-    var regExRec = /^(?:(?<real>(?:[+\-])?\d+(?:(?:\.\d+)?)?)?)?(?<imaginary>(?:[+\-])?\d+(?:(?:\.\d+)??)?)?[iI]$/i
+    var regExRec = /^(?:(?<real>(?:[-])?\d+(?:(?:\.\d+)?)?(?!i))?)?(?<imaginary>(?:[+\-])?\d+(?:\.\d+)?)?[iI]$/i
     var regExExp = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:e))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?[iI]$/i
     var regExTime = /^(?:(?<amplitude>\d+(?:(?:(?:\.\d+)?)))(?:cos\())(?:(?<frequency>\d+(?:)(?:(?:\.\d+)?)))(?<phase>(?:[+\-])?(\d+(?:\.\d+)?)?)?(?:(\)))$/i
 
@@ -31,7 +31,9 @@ export const PartitionComplex = (number) => {
             }
         }
         else{ //Rectangular
-            return [parseFloat(result[1]), parseFloat(result[2])]
+            var newReal = (Number.isNaN(parseFloat(result[1]))? 0: parseFloat(result[1]))
+            var newImag = (Number.isNaN(parseFloat(result[2]))? 0: parseFloat(result[2]))
+            return [newReal, newImag]
         }
     }
     catch(error){
@@ -41,7 +43,8 @@ export const PartitionComplex = (number) => {
 }
 
 //Reconstructs complex number from real and imag parts to rectangular form
-export const ReconstructComplex = (parts, form) => { //Parts[0] - real, 1 - imag
+export const ReconstructComplex = (parts, form) => { //Parts[0] - real, 1 - imag, 2-amplitude, 3-phase
+    console.log(parts)
     var newAmplitude = Math.sqrt(Math.pow(parts[0], 2) + Math.pow(parts[1], 2))
     var newPhase = Math.atan(parts[1]/parts[0]) * 180 / Math.PI
     switch(form){

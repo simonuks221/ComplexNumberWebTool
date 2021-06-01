@@ -7,7 +7,7 @@ const Header = ({userName, addNewNumber}) => {
                     <h4 className = 'text-light'>Add complex numbers below</h4>
                 </div>
                 <div className = 'col-2'>
-                    <button className = 'btn-primary' onClick = {addNewNumber}>Add number</button>
+                    <button className = 'btn-secondary rounded' onClick = {addNewNumber}>Add number</button>
                 </div>
 
             </div>
