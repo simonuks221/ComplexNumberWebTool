@@ -19,14 +19,12 @@ export const PartitionComplex = (number) => {
                 else{
                     var newReal = result[1] * Math.cos(result[3] * Math.PI / 180).toFixed(3)
                     var newImag = result[1] * Math.sin(result[3] * Math.PI / 180).toFixed(3)
-                    console.log(newReal, newImag, 'time')
                     return [parseFloat(newReal), parseFloat(newImag), parseFloat(result[1]), parseFloat(result[3])]
                 }
             }
             else{ //Expoenntial
                 var newReal = result[1] * Math.cos(result[2] * Math.PI / 180).toFixed(3)
                 var newImag = result[1] * Math.sin(result[2] * Math.PI / 180).toFixed(3)
-                console.log(newReal, newImag, 'exponential', result[1], result[2])
                 return[parseFloat(newReal), parseFloat(newImag), parseFloat(result[1]), parseFloat(result[2])]
             }
         }
@@ -44,7 +42,6 @@ export const PartitionComplex = (number) => {
 
 //Reconstructs complex number from real and imag parts to rectangular form
 export const ReconstructComplex = (parts, form) => { //Parts[0] - real, 1 - imag, 2-amplitude, 3-phase
-    console.log(parts)
     var newAmplitude = Math.sqrt(Math.pow(parts[0], 2) + Math.pow(parts[1], 2))
     var newPhase = Math.atan(parts[1]/parts[0]) * 180 / Math.PI
     switch(form){
@@ -73,7 +70,6 @@ export const ReconstructComplex = (parts, form) => { //Parts[0] - real, 1 - imag
 export const AddComplex = (number1, number2) => {
     var complex1 = PartitionComplex(number1)
     var complex2 = PartitionComplex(number2)
-    console.log(complex1, complex2)
     return ReconstructComplex([parseInt(complex1[0]) + parseInt(complex2[0]), parseInt(complex1[1]) + parseInt(complex2[1])], 'rectangular')
 }
 
