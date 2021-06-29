@@ -8,5 +8,9 @@
 
 ![image](https://user-images.githubusercontent.com/20909772/123778660-fe3f5b80-d8d9-11eb-99eb-b201e88ec00a.png)
 
+<p>Additionally added a cute catgirl image api integration for relaxing cute infinite catgirl images below <3</p>
+
 <p>Done using ReactJS, regex and Bootstrap css library.</p>
+
+
 <p>Made by Simonas Riauka</p>
