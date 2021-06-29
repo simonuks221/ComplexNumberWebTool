@@ -16,7 +16,7 @@
     "react-scripts": "^4.0.3",
     "web-vitals": "^1.1.2"
   },
-  "homepage": "https://simonuks221.github.io/ComplexNumberConverter/",
+  "homepage": "https://simonuks221.github.io/ComplexNumberWebTool/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

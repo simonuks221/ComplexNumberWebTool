@@ -6,26 +6,26 @@ import {AddComplex, SubtractComplex, PartitionComplex, ReconstructComplex} from 
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import {} from 'react-bootstrap'
-
 import {useState, useEffect} from 'react' //A so called Hook
 
 function App() {
   const name = "Simonas"
   const [mathResult, setResult] = useState({result: false, rectangularForm: '', exponentialForm: '', timeForm: '',});
-  const [animeImage, setAnimeImage] = useState({URL: ''})
+  const [animeImage, setAnimeImage] = useState({url: ''})
+  const [useAnimeImage, setUseAnimeImage] = useState(false)
 
   const [complexNumbers, setNumbers] = useState([])
 
   useEffect(() => {
-    const getAnimeImage = async () =>{
-      const imageFromServer = await fetchAnimeImage()
-      setAnimeImage(imageFromServer)
-      console.log(imageFromServer)
-    }
-
     getAnimeImage()
   }, [])
+
+  const getAnimeImage = async () =>{
+    const imageFromServer = await fetchAnimeImage()
+    const newState = animeImage
+    newState.url = imageFromServer.url
+    setAnimeImage(newState)
+  }
   
   //Fetch anime pic
   const fetchAnimeImage = async() => {
@@ -96,7 +96,7 @@ const MathAction = () => {
       else{
         switch(number.mathAction){
           default:
-            console.log('Bad math action')
+            console.error('Bad math action')
             break;
           case 1:
             answer = AddComplex(answer, number.rectangularForm)
@@ -122,6 +122,11 @@ const AddNewNumber = () => {
   setNumbers([...complexNumbers, newNumber])
 }
 
+const ShowAnimeImageChanged = (e) => {
+  getAnimeImage()
+  setUseAnimeImage(e.target.checked)
+}
+
   return (
     <div className="App bg-dark">
       <div className = 'container bg-dark'>
@@ -136,8 +141,15 @@ const AddNewNumber = () => {
         {complexNumbers.length > 0 ?<ComplexNumbers complexNumbers = {complexNumbers} onDelete = {deleteNumber} onNumberChange = {changeNumber} onMathAction = {MathActionButtonPressed} complexNumberResult = {mathResult}/>
         : <p className = 'text mx-2 my-2 text-light'>No numbers, press above to add</p> }
        </div>
-       <div>
-         <AnimeImage animeImageInfo = {animeImage}/>
+       <div className = 'pt-3'>
+         <div className = 'mx-5 text-center'>
+         <input className="form-check-input" type="checkbox"  onChange={e => ShowAnimeImageChanged(e)} id="flexCheckDefault"/>
+          <label className="form-check-label text-light mx-5" for="flexCheckDefault">
+          Show catgirl images
+          </label>
+         </div>
+         {useAnimeImage? <AnimeImage animeImageInfo = {animeImage}/>: ''}
+          
        </div>
     </div>
   );
