@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/ComplexNumberWebTool/static/css/main.afd7172b.chunk.css",
-    "main.js": "/ComplexNumberWebTool/static/js/main.8470e6e9.chunk.js",
-    "main.js.map": "/ComplexNumberWebTool/static/js/main.8470e6e9.chunk.js.map",
-    "runtime-main.js": "/ComplexNumberWebTool/static/js/runtime-main.2fb2903b.js",
-    "runtime-main.js.map": "/ComplexNumberWebTool/static/js/runtime-main.2fb2903b.js.map",
+    "main.js": "/ComplexNumberWebTool/static/js/main.ea0dca57.chunk.js",
+    "main.js.map": "/ComplexNumberWebTool/static/js/main.ea0dca57.chunk.js.map",
+    "runtime-main.js": "/ComplexNumberWebTool/static/js/runtime-main.2662cd86.js",
+    "runtime-main.js.map": "/ComplexNumberWebTool/static/js/runtime-main.2662cd86.js.map",
     "static/css/2.61b4cb56.chunk.css": "/ComplexNumberWebTool/static/css/2.61b4cb56.chunk.css",
-    "static/js/2.c392a643.chunk.js": "/ComplexNumberWebTool/static/js/2.c392a643.chunk.js",
-    "static/js/2.c392a643.chunk.js.map": "/ComplexNumberWebTool/static/js/2.c392a643.chunk.js.map",
-    "static/js/3.9085b0d4.chunk.js": "/ComplexNumberWebTool/static/js/3.9085b0d4.chunk.js",
-    "static/js/3.9085b0d4.chunk.js.map": "/ComplexNumberWebTool/static/js/3.9085b0d4.chunk.js.map",
+    "static/js/2.27698959.chunk.js": "/ComplexNumberWebTool/static/js/2.27698959.chunk.js",
+    "static/js/2.27698959.chunk.js.map": "/ComplexNumberWebTool/static/js/2.27698959.chunk.js.map",
+    "static/js/3.d7df71e9.chunk.js": "/ComplexNumberWebTool/static/js/3.d7df71e9.chunk.js",
+    "static/js/3.d7df71e9.chunk.js.map": "/ComplexNumberWebTool/static/js/3.d7df71e9.chunk.js.map",
     "index.html": "/ComplexNumberWebTool/index.html",
     "static/css/2.61b4cb56.chunk.css.map": "/ComplexNumberWebTool/static/css/2.61b4cb56.chunk.css.map",
     "static/css/main.afd7172b.chunk.css.map": "/ComplexNumberWebTool/static/css/main.afd7172b.chunk.css.map",
-    "static/js/2.c392a643.chunk.js.LICENSE.txt": "/ComplexNumberWebTool/static/js/2.c392a643.chunk.js.LICENSE.txt"
+    "static/js/2.27698959.chunk.js.LICENSE.txt": "/ComplexNumberWebTool/static/js/2.27698959.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2fb2903b.js",
+    "static/js/runtime-main.2662cd86.js",
     "static/css/2.61b4cb56.chunk.css",
-    "static/js/2.c392a643.chunk.js",
+    "static/js/2.27698959.chunk.js",
     "static/css/main.afd7172b.chunk.css",
-    "static/js/main.8470e6e9.chunk.js"
+    "static/js/main.ea0dca57.chunk.js"
   ]
 }
